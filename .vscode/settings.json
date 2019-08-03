@@ -1,0 +1,3 @@
+{
+  "tsimporter.filesToScan": ["src/**/*.ts", "src/**/*.tsx"]
+}

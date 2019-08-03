@@ -1,0 +1,13 @@
+.legend {
+  margin-bottom: 2rem;
+}
+
+.fileButton::-webkit-file-upload-button {
+  border: none;
+  background-color: #212529;
+  color: white;
+}
+
+.submit[disabled] {
+  pointer-events: none;
+}
