@@ -1,0 +1,8 @@
+{
+  "name": "photoblog-upload-server-http-get-static-000type-000filename",
+  "version": "0.1.0",
+  "license": "MIT",
+  "dependencies": {
+    "photoblog-upload-client": "*"
+  }
+}

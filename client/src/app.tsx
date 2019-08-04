@@ -4,15 +4,14 @@ import { createClient } from 'contentful-management';
 import { Layout } from './components/layout';
 import { Form, hasRequiredPayload, SubmitPayload } from './components/form';
 
+const { SPACE_ID, ACCESS_TOKEN } = window.photoblogUploadClient;
+
 const App: React.SFC = () => {
   const handleSubmit = async (args?: SubmitPayload): Promise<void> | never => {
     if (!hasRequiredPayload(args)) {
       throw Error('Missing arguments.');
     }
-    if (
-      !Boolean(process.env.REACT_APP_ACCESS_TOKEN) ||
-      !Boolean(process.env.REACT_APP_SPACE_ID)
-    ) {
+    if (!Boolean(ACCESS_TOKEN) || !Boolean(SPACE_ID)) {
       throw Error('Missing environment variables.');
     }
 
@@ -22,10 +21,8 @@ const App: React.SFC = () => {
     const title = payload.title as string;
     const altText = payload.altText as string;
     const tags = payload.tags as string[];
-    const accessToken = process.env.REACT_APP_ACCESS_TOKEN as string;
-    const spaceId = process.env.REACT_APP_SPACE_ID as string;
-    const client = createClient({ accessToken });
-    const space = await client.getSpace(spaceId);
+    const client = createClient({ accessToken: ACCESS_TOKEN });
+    const space = await client.getSpace(SPACE_ID);
     const env = await space.getEnvironment('master');
     const tmpAsset = await env.createAssetFromFiles({
       fields: {
