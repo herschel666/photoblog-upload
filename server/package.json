@@ -1,0 +1,16 @@
+{
+  "name": "photoblog-upload-server",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore .",
+    "test": "npm run lint"
+  },
+  "devDependencies": {
+    "@architect/cli": "^6.0.28",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.0"
+  }
+}
