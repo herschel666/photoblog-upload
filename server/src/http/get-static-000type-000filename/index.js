@@ -28,7 +28,10 @@ exports.handler = async (req) => {
     );
     const body = await readFile(filePath, 'utf8');
     return {
-      headers: { 'content-type': getContentType(req.params.type) },
+      headers: {
+        'content-type': getContentType(req.params.type),
+        'cache-control': 'public, max-age=31536000, immutable',
+      },
       body,
     };
   } catch (err) {
