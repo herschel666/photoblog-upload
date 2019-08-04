@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd client
+npm run build
+cd ..
+
+cd server
+npx arc hydrate
+cd ..
+
+cp ./client/build/favicon.ico ./server/src/http/get-favicon_ico/
+cp ./client/build/index.html ./server/src/http/get-index/
+cp -r ./client/build/static ./server/src/http/get-static-000type-000filename/

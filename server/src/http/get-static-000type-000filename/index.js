@@ -16,20 +16,13 @@ const getContentType = (type) => {
 };
 
 exports.handler = async (req) => {
+  const { type, filename } = req.params;
   try {
-    const filePath = path.join(
-      __dirname,
-      'node_modules',
-      'photoblog-upload-client',
-      'build',
-      'static',
-      req.params.type,
-      req.params.filename
-    );
+    const filePath = path.join(__dirname, 'static', type, filename);
     const body = await readFile(filePath, 'utf8');
     return {
       headers: {
-        'content-type': getContentType(req.params.type),
+        'content-type': getContentType(type),
         'cache-control': 'public, max-age=31536000, immutable',
       },
       body,
@@ -40,7 +33,7 @@ exports.handler = async (req) => {
     return {
       statusCode: 404,
       headers: { 'content-type': getContentType() },
-      body: `File static/${req.params.type}/${req.params.filename} does not exist.`,
+      body: `File static/${type}/${filename} does not exist.`,
     };
   }
 };

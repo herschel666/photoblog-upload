@@ -6,13 +6,7 @@ const readFile = promisify(fs.readFile);
 
 exports.handler = async () => {
   try {
-    const filePath = path.join(
-      __dirname,
-      'node_modules',
-      'photoblog-upload-client',
-      'build',
-      'favicon.ico'
-    );
+    const filePath = path.join(__dirname, 'favicon.ico');
     const content = await readFile(filePath);
     const body = content.toString('base64');
 

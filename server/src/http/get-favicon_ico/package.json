@@ -1,8 +1,0 @@
-{
-  "name": "photoblog-upload-server-http-get-favicon_ico",
-  "version": "0.1.0",
-  "license": "MIT",
-  "dependencies": {
-    "photoblog-upload-client": "*"
-  }
-}

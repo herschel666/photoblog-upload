@@ -38,13 +38,7 @@ exports.handler = async (req) => {
   }
 
   try {
-    const filePath = path.join(
-      __dirname,
-      'node_modules',
-      'photoblog-upload-client',
-      'build',
-      'index.html'
-    );
+    const filePath = path.join(__dirname, 'index.html');
     const content = await readFile(filePath, 'utf8');
     const body = content
       .replace('%REACT_APP_SPACE_ID%', process.env.SPACE_ID)

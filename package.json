@@ -2,12 +2,10 @@
   "name": "photoblog-upload",
   "version": "0.1.0",
   "scripts": {
-    "postinstall": "lerna bootstrap",
-    "test:client": "cd client && CI=true npm test",
-    "test:server": "cd server && npm test",
-    "test": "npm run test:client && npm run test:server",
-    "prebootstrap": "cd client && npm run build",
+    "install": "npm run bootstrap",
+    "test": "lerna run test",
     "bootstrap": "lerna bootstrap",
+    "postbootstrap": "./scripts/bootstrap-server",
     "serve": "cd server && npx arc sandbox",
     "fmt": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --write \"**/**.{js,jsx,ts,tsx,md,css}\""
   },

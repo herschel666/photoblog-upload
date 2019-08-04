@@ -12,7 +12,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "jest": "react-scripts test",
+    "jest": "CI=true react-scripts test",
     "test": "npm run lint && npm run jest",
     "lint": "tsc --noEmit && tslint --format stylish --project tsconfig.json"
   },
