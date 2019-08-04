@@ -38,7 +38,7 @@ exports.handler = async (req) => {
     console.log(err);
 
     return {
-      status: 404,
+      statusCode: 404,
       headers: { 'content-type': getContentType() },
       body: `File static/${req.params.type}/${req.params.filename} does not exist.`,
     };

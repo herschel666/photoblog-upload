@@ -3,5 +3,12 @@ import React from 'react';
 import styles from './layout.module.css';
 
 export const Layout: React.SFC = ({ children }) => (
-  <main className={styles.main}>{children}</main>
+  <>
+    <header className={styles.header}>
+      <form method="post" action="/logout" className={styles.form}>
+        <button className="nes-btn">Logout</button>
+      </form>
+    </header>
+    <main className={styles.main}>{children}</main>
+  </>
 );

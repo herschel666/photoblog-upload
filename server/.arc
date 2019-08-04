@@ -3,9 +3,13 @@ photoblog-upload-server
 
 @aws
 region eu-central-1
-# bucket your-deploy-s3-bucket-name
+profile ek-photo-upload
+bucket ek-photo-upload-deploy-bucket
 
 @http
 get /
 get /favicon.ico
 get /static/:type/:filename
+
+post /
+post /logout
