@@ -9,10 +9,14 @@ exports.handler = async () => {
     const filePath = path.join(__dirname, 'favicon.ico');
     const content = await readFile(filePath);
     const body = content.toString('base64');
+    const headers = {
+      'content-type': 'image/x-icon',
+      'cache-control': 'public, max-age=604800',
+    };
 
     return {
-      headers: { 'content-type': 'image/x-icon' },
       isBase64Encoded: true,
+      headers,
       body,
     };
   } catch (err) {

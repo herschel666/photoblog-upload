@@ -43,9 +43,13 @@ exports.handler = async (req) => {
     const body = content
       .replace('%REACT_APP_SPACE_ID%', process.env.SPACE_ID)
       .replace('%REACT_APP_ACCESS_TOKEN%', process.env.ACCESS_TOKEN);
+    const headers = {
+      'content-type': 'text/html; charset=utf8',
+      'cache-control': 'private, no-store',
+    };
 
     return {
-      headers: { 'content-type': 'text/html; charset=utf8' },
+      headers,
       body,
     };
   } catch (err) {
