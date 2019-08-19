@@ -66,7 +66,7 @@ declare module 'contentful-management' {
   }
 
   interface Space {
-    getEnvironment(environmentId: 'master'): Promise<Environment>;
+    getEnvironment(environmentId: string): Promise<Environment>;
   }
 
   interface Client {
