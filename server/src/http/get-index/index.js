@@ -6,7 +6,7 @@ const fs = require('fs');
 const readFile = promisify(fs.readFile);
 
 const unauthorizedResponse = {
-  statusCode: 401,
+  statusCode: 200,
   headers: { 'content-type': 'text/html; charset=utf8' },
   body: /* html */ `
 <!doctype html>
@@ -17,7 +17,7 @@ const unauthorizedResponse = {
     <title>ek|photos &middot; Upload</title>
   </head>
   <body>
-    <form method="post">
+    <form method="post" action="/">
       <fieldset>
         <legend>Login</legend>
         <label for="password">Password</label>
@@ -41,8 +41,9 @@ exports.handler = async (req) => {
     const filePath = path.join(__dirname, 'index.html');
     const content = await readFile(filePath, 'utf8');
     const body = content
-      .replace('%REACT_APP_SPACE_ID%', process.env.SPACE_ID)
-      .replace('%REACT_APP_ACCESS_TOKEN%', process.env.ACCESS_TOKEN);
+      .replace('__SPACE_ID__', process.env.SPACE_ID)
+      .replace('__ACCESS_TOKEN__', process.env.ACCESS_TOKEN)
+      .replace('__CF_ENV__', process.env.CF_ENV);
     const headers = {
       'content-type': 'text/html; charset=utf8',
       'cache-control': 'private, no-store',
