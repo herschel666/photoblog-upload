@@ -1,2 +1,6 @@
 node_modules
 .arc-env
+sam.*
+src/http/get-static-000type-000filename/static
+src/http/get-index/index.html
+src/http/get-favicon_ico/favicon.ico

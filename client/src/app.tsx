@@ -4,7 +4,7 @@ import { createClient } from 'contentful-management';
 import { Layout } from './components/layout';
 import { Form, hasRequiredPayload, SubmitPayload } from './components/form';
 
-const { SPACE_ID, ACCESS_TOKEN } = window.photoblogUploadClient;
+const { SPACE_ID, ACCESS_TOKEN, CF_ENV } = window.photoblogUploadClient;
 
 const App: React.SFC = () => {
   const handleSubmit = async (args?: SubmitPayload): Promise<void> | never => {
@@ -23,7 +23,7 @@ const App: React.SFC = () => {
     const tags = payload.tags as string[];
     const client = createClient({ accessToken: ACCESS_TOKEN });
     const space = await client.getSpace(SPACE_ID);
-    const env = await space.getEnvironment('master');
+    const env = await space.getEnvironment(CF_ENV);
     const tmpAsset = await env.createAssetFromFiles({
       fields: {
         title: {

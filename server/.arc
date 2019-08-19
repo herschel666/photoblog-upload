@@ -13,3 +13,6 @@ get /static/:type/:filename
 
 post /
 post /logout
+
+@macros
+custom-domain
