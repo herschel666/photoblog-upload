@@ -16,7 +16,8 @@ const getContentType = (type) => {
 };
 
 exports.handler = async (req) => {
-  const { type, filename } = req.params;
+  console.log(req);
+  const { type, filename } = req.pathParameters;
   try {
     const filePath = path.join(__dirname, 'static', type, filename);
     const body = await readFile(filePath, 'utf8');

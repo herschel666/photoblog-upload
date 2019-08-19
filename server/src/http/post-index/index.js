@@ -1,7 +1,10 @@
 const arc = require('@architect/functions');
 
 exports.handler = async (req) => {
-  const { password } = req.body;
+  const { body, ...request } = req;
+  console.log({ ...request, body: Array.from(body, () => '*').join('') });
+
+  const { password } = arc.http.helpers.bodyParser(req);
 
   if (password !== process.env.PASSWORD) {
     return {
