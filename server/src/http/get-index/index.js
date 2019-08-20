@@ -5,41 +5,25 @@ const fs = require('fs');
 
 const readFile = promisify(fs.readFile);
 
-const unauthorizedResponse = {
+const loadPage = (name) =>
+  readFile(path.join(__dirname, `${name}.html`), 'utf8');
+
+const unauthorizedResponse = (body) => ({
   statusCode: 200,
   headers: { 'content-type': 'text/html; charset=utf8' },
-  body: /* html */ `
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="robots" content="noindex,noarchive">
-    <title>ek|photos &middot; Upload</title>
-  </head>
-  <body>
-    <form method="post" action="/">
-      <fieldset>
-        <legend>Login</legend>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-        <button>Submit</button>
-      </fieldset>
-    </form>
-  </body>
-</html>
-`,
-};
+  body,
+});
 
 exports.handler = async (req) => {
   const { loggedIn } = await arc.http.session.read(req);
 
-  if (!loggedIn) {
-    return unauthorizedResponse;
-  }
-
   try {
-    const filePath = path.join(__dirname, 'index.html');
-    const content = await readFile(filePath, 'utf8');
+    if (!loggedIn) {
+      const body = await loadPage('login');
+      return unauthorizedResponse(body);
+    }
+
+    const content = await loadPage('index');
     const body = content
       .replace('__SPACE_ID__', process.env.SPACE_ID)
       .replace('__ACCESS_TOKEN__', process.env.ACCESS_TOKEN)
