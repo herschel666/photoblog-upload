@@ -57,7 +57,7 @@ const App: React.SFC = () => {
           'en-US': tags,
         },
         description: {
-          'en-US': payload.description,
+          'en-US': payload.description || '·',
         },
         file: {
           'en-US': {
