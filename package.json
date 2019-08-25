@@ -6,6 +6,7 @@
     "test": "lerna run test",
     "bootstrap": "lerna bootstrap",
     "postbootstrap": "./scripts/bootstrap-server",
+    "start": "cd client && npm start",
     "serve": "cd server && npx arc sandbox",
     "fmt": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --write \"**/**.{js,jsx,ts,tsx,md,css}\""
   },
