@@ -141,94 +141,126 @@ const reducer = (state: ReducerShape, action: ReducerAction): ReducerShape => {
 
     case setFileError.type: {
       const { fileError } = (action as SetFileErrorAction).payload;
-      return {
+      const newState = {
         ...state,
-        valid: isFormValid(state),
         fileError,
+      };
+
+      return {
+        ...newState,
+        valid: isFormValid(newState),
       };
     }
 
     case setTitle.type: {
       const { title } = (action as SetTitleAction).payload;
-      return {
+      const newState = {
         ...state,
-        valid: isFormValid(state),
         submitPayload: {
           ...state.submitPayload,
           title,
         },
       };
+
+      return {
+        ...newState,
+        valid: isFormValid(newState),
+      };
     }
 
     case setFileName.type: {
       const { fileName } = (action as SetFileNameAction).payload;
-      return {
+      const newState = {
         ...state,
-        valid: isFormValid(state),
         submitPayload: {
           ...state.submitPayload,
           fileName,
         },
       };
+
+      return {
+        ...newState,
+        valid: isFormValid(newState),
+      };
     }
 
     case setFileContent.type: {
       const { fileContent } = (action as SetFileContentAction).payload;
-      return {
+      const newState = {
         ...state,
-        valid: isFormValid(state),
         submitPayload: {
           ...state.submitPayload,
           fileContent,
         },
       };
+
+      return {
+        ...newState,
+        valid: isFormValid(newState),
+      };
     }
 
     case setTags.type: {
       const { tags } = (action as SetTagsAction).payload;
-      return {
+      const newState = {
         ...state,
-        valid: isFormValid(state),
         submitPayload: {
           ...state.submitPayload,
           tags,
         },
       };
+
+      return {
+        ...newState,
+        valid: isFormValid(newState),
+      };
     }
 
     case setAltText.type: {
       const { altText } = (action as SetAltTextAction).payload;
-      return {
+      const newState = {
         ...state,
-        valid: isFormValid(state),
         submitPayload: {
           ...state.submitPayload,
           altText,
         },
       };
+
+      return {
+        ...newState,
+        valid: isFormValid(newState),
+      };
     }
 
     case setDate.type: {
       const { date } = (action as SetDateAction).payload;
-      return {
+      const newState = {
         ...state,
-        valid: isFormValid(state),
         submitPayload: {
           ...state.submitPayload,
           date,
         },
       };
+
+      return {
+        ...newState,
+        valid: isFormValid(newState),
+      };
     }
 
     case setDescription.type: {
       const { description } = (action as SetDescriptionAction).payload;
-      return {
+      const newState = {
         ...state,
-        valid: isFormValid(state),
         submitPayload: {
           ...state.submitPayload,
           description,
         },
+      };
+
+      return {
+        ...newState,
+        valid: isFormValid(newState),
       };
     }
 
