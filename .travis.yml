@@ -11,3 +11,7 @@ notifications:
 branches:
   only:
     - master
+
+before_script:
+  - echo "@testing" > server/.arc-env
+  - echo "PASSWORD letmein" >> server/.arc-env
