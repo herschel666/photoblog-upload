@@ -5,6 +5,8 @@ const fs = require('fs');
 
 const readFile = promisify(fs.readFile);
 
+const isInvalidRequestViaProxy = (req) => req.path !== '/';
+
 const loadPage = (name) =>
   readFile(path.join(__dirname, `${name}.html`), 'utf8');
 
@@ -15,6 +17,14 @@ const unauthorizedResponse = (body) => ({
 });
 
 exports.handler = async (req) => {
+  if (isInvalidRequestViaProxy(req)) {
+    return {
+      statusCode: 404,
+      headers: { 'content-type': 'text/plain; charset=utf8' },
+      body: 'File not found',
+    };
+  }
+
   const { loggedIn } = await arc.http.session.read(req);
 
   try {
