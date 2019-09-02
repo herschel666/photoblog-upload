@@ -138,7 +138,7 @@ describe('GET /static/:type/:filename', () => {
     expect(response.ok).toBe(true);
     expect(response.headers.get('content-type')).toBe(contentType);
     // TODO: add next test when sandbox has cache-control header bug fixed
-    // expect(response.headers.get('ache-control')).toBe(
+    // expect(response.headers.get('cache-control')).toBe(
     //   'public, max-age=31536000, immutable'
     // );
     expect(response.text()).resolves.toBe('test');
