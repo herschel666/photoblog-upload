@@ -16,7 +16,7 @@
     "eslint-plugin-jest": "22.16.0",
     "eslint-plugin-prettier": "3.1.0",
     "fetch-cookie": "0.7.3",
-    "is-base64": "0.1.0",
+    "is-base64": "1.0.0",
     "jest": "24.9.0",
     "node-fetch": "2.6.0"
   },
