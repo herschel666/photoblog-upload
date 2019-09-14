@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "license": "MIT",
   "dependencies": {
-    "classnames": "^2.2.6",
-    "contentful-management": "^5.9.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "classnames": "2.2.6",
+    "contentful-management": "5.9.1",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
     "react-scripts": "3.0.1"
   },
   "scripts": {
@@ -32,15 +32,15 @@
     ]
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.9",
-    "@types/jest": "^24.0.16",
-    "@types/node": "^12.6.9",
-    "@types/react": "^16.8.24",
-    "@types/react-dom": "^16.8.5",
-    "tslint": "^5.18.0",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-microsoft-contrib": "^6.2.0",
-    "tslint-react": "^4.0.0",
-    "typescript": "^3.5.3"
+    "@types/classnames": "2.2.9",
+    "@types/jest": "24.0.17",
+    "@types/node": "12.7.2",
+    "@types/react": "16.9.2",
+    "@types/react-dom": "16.8.5",
+    "tslint": "5.18.0",
+    "tslint-config-prettier": "1.18.0",
+    "tslint-microsoft-contrib": "6.2.0",
+    "tslint-react": "4.0.0",
+    "typescript": "3.5.3"
   }
 }
