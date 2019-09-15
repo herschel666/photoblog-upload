@@ -8,6 +8,10 @@
   color: white;
 }
 
+.textarea {
+  resize: none;
+}
+
 .submit[disabled] {
   pointer-events: none;
   opacity: 0.6;

@@ -1,4 +1,5 @@
 import React, { useReducer, useRef } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
 import classNames from 'classnames';
 
 import { FormRow } from './form-row';
@@ -391,21 +392,23 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
           />
         </FormRow>
         <FormRow id="altText" label="Alt-Text">
-          <textarea
+          <TextareaAutosize
             id="altText"
             name="altText"
             maxLength={280}
-            className="nes-input"
+            minRows={1}
+            className={classNames(styles.textarea, 'nes-textarea')}
             placeholder="Alt-Text…"
             onChange={handleAltTextChange}
             disabled={inputDisabled}
           />
         </FormRow>
         <FormRow id="description" label="Description">
-          <textarea
+          <TextareaAutosize
             id="description"
             name="description"
-            className="nes-textarea"
+            className={classNames(styles.textarea, 'nes-textarea')}
+            minRows={1}
             placeholder="Description…"
             onChange={handleDescriptionChange}
             disabled={inputDisabled}
