@@ -2,18 +2,28 @@ import React from 'react';
 import { createClient } from 'contentful-management';
 
 import { Layout } from './components/layout';
-import { Form, hasRequiredPayload, SubmitPayload } from './components/form';
+import {
+  Form,
+  hasRequiredPayload,
+  SubmitPayload,
+  UpldateLoadingStateFunction,
+} from './components/form';
 
 const { SPACE_ID, ACCESS_TOKEN, CF_ENV } = window.photoblogUploadClient;
 
 const App: React.SFC = () => {
-  const handleSubmit = async (args?: SubmitPayload): Promise<void> | never => {
+  const handleSubmit = async (
+    updateLoadingState: UpldateLoadingStateFunction,
+    args?: SubmitPayload
+  ): Promise<void> | never => {
     if (!hasRequiredPayload(args)) {
       throw Error('Missing arguments.');
     }
     if (!Boolean(ACCESS_TOKEN) || !Boolean(SPACE_ID)) {
       throw Error('Missing environment variables.');
     }
+
+    updateLoadingState(10);
 
     const payload = args as SubmitPayload;
     const fileName = payload.fileName as string;
@@ -24,6 +34,8 @@ const App: React.SFC = () => {
     const client = createClient({ accessToken: ACCESS_TOKEN });
     const space = await client.getSpace(SPACE_ID);
     const env = await space.getEnvironment(CF_ENV);
+
+    updateLoadingState(20);
     const tmpAsset = await env.createAssetFromFiles({
       fields: {
         title: {
@@ -44,7 +56,11 @@ const App: React.SFC = () => {
     const asset = await tmpAsset.processForLocale('en-US', {
       processingCheckWait: 2000,
     });
+
+    updateLoadingState(30);
     await asset.publish();
+
+    updateLoadingState(40);
     const entry = await env.createEntry('image', {
       fields: {
         title: {
@@ -66,6 +82,8 @@ const App: React.SFC = () => {
         },
       },
     });
+
+    updateLoadingState(50);
     await entry.publish();
   };
 
