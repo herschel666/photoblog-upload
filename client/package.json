@@ -7,7 +7,8 @@
     "contentful-management": "5.10.2",
     "react": "16.9.0",
     "react-dom": "16.9.0",
-    "react-scripts": "3.1.1"
+    "react-scripts": "3.1.1",
+    "react-textarea-autosize": "^7.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,6 +38,7 @@
     "@types/node": "12.7.5",
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",
+    "@types/react-textarea-autosize": "^4.3.4",
     "tslint": "5.20.0",
     "tslint-config-prettier": "1.18.0",
     "tslint-microsoft-contrib": "6.2.0",
