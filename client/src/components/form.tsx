@@ -2,7 +2,10 @@ import React, { useReducer, useRef } from 'react';
 import classNames from 'classnames';
 
 import { FormRow } from './form-row';
+import { LoadingBar, LoadingState } from './loading-bar';
 import styles from './form.module.css';
+
+export type UpldateLoadingStateFunction = (loadingState?: LoadingState) => void;
 
 export interface SubmitPayload {
   fileName?: string;
@@ -15,14 +18,17 @@ export interface SubmitPayload {
 }
 
 interface ReducerShape {
-  loading: boolean;
+  loadingState?: LoadingState;
   valid: boolean;
   fileError: boolean;
   submitPayload?: SubmitPayload;
 }
 
 interface Props {
-  onSubmit: (args: SubmitPayload) => Promise<void>;
+  onSubmit: (
+    updateLoadingState: UpldateLoadingStateFunction,
+    args?: SubmitPayload
+  ) => Promise<void>;
 }
 
 interface Action<T> {
@@ -31,10 +37,10 @@ interface Action<T> {
   payload: T;
 }
 
-type SetLoadingAction = Action<{ loading: boolean }>;
-const setLoading = (loading: boolean): SetLoadingAction => ({
+type SetLoadingAction = Action<{ loadingState?: LoadingState }>;
+const setLoading = (loadingState?: LoadingState): SetLoadingAction => ({
   type: setLoading.type,
-  payload: { loading },
+  payload: { loadingState },
 });
 setLoading.type = 'setLoading';
 
@@ -132,10 +138,10 @@ const isFormValid = (state: ReducerShape): boolean => {
 const reducer = (state: ReducerShape, action: ReducerAction): ReducerShape => {
   switch (action.type) {
     case setLoading.type: {
-      const { loading } = (action as SetLoadingAction).payload;
+      const { loadingState } = (action as SetLoadingAction).payload;
       return {
         ...state,
-        loading,
+        loadingState,
       };
     }
 
@@ -265,7 +271,7 @@ const reducer = (state: ReducerShape, action: ReducerAction): ReducerShape => {
     }
 
     case resetForm.type: {
-      const { submitPayload, ...newState } = state;
+      const { submitPayload, loadingState, ...newState } = state;
       return newState;
     }
 
@@ -278,11 +284,11 @@ const reducer = (state: ReducerShape, action: ReducerAction): ReducerShape => {
 export const Form: React.SFC<Props> = ({ onSubmit }) => {
   const fileInput = useRef<HTMLInputElement>(null);
   const [state, dispatch] = useReducer<typeof reducer>(reducer, {
-    loading: false,
     valid: false,
     fileError: false,
   });
-  const submitDisabled = !state.valid || state.loading;
+  const inputDisabled = !(state.loadingState === undefined);
+  const submitDisabled = !state.valid || inputDisabled;
   const handleSubmit = async (evnt: React.SyntheticEvent<HTMLFormElement>) => {
     evnt.preventDefault();
     const form = evnt.currentTarget;
@@ -295,9 +301,10 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
       state.submitPayload.fileContent &&
       state.submitPayload.altText
     ) {
-      dispatch(setLoading(true));
+      const updateLoadingState: UpldateLoadingStateFunction = (loadingState) =>
+        dispatch(setLoading(loadingState));
       try {
-        await onSubmit(state.submitPayload);
+        await onSubmit(updateLoadingState, state.submitPayload);
       } catch (err) {
         // tslint:disable-next-line no-console
         console.error(err);
@@ -309,7 +316,6 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
       }
       dispatch(resetForm());
       form.reset();
-      dispatch(setLoading(false));
     }
   };
   const handleFileChange = (evnt: React.SyntheticEvent<HTMLInputElement>) => {
@@ -345,9 +351,7 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
     <form method="post" onSubmit={handleSubmit}>
       <fieldset>
         <legend className={styles.legend}>Upload an image…</legend>
-        {state.loading && (
-          <progress className="nes-progress is-primary" max={100} />
-        )}
+        <LoadingBar value={state.loadingState} />
         <FormRow id="file" label="File">
           <input
             type="file"
@@ -360,7 +364,7 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
             placeholder="File…"
             onChange={handleFileChange}
             ref={fileInput}
-            disabled={state.loading}
+            disabled={inputDisabled}
           />
         </FormRow>
         <FormRow id="title" label="Title">
@@ -371,7 +375,7 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
             className="nes-input"
             placeholder="Title…"
             onChange={handleTitleChange}
-            disabled={state.loading}
+            disabled={inputDisabled}
           />
         </FormRow>
         <FormRow id="tags" label="Tags">
@@ -382,7 +386,7 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
             className="nes-input"
             placeholder="Tags…"
             onChange={handleTagsChange}
-            disabled={state.loading}
+            disabled={inputDisabled}
           />
         </FormRow>
         <FormRow id="altText" label="Alt-Text">
@@ -394,7 +398,7 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
             className="nes-input"
             placeholder="Alt-Text…"
             onChange={handleAltTextChange}
-            disabled={state.loading}
+            disabled={inputDisabled}
           />
         </FormRow>
         <FormRow id="date" label="Date">
@@ -405,7 +409,7 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
             className="nes-input"
             placeholder="Date…"
             onChange={handleDateChange}
-            disabled={state.loading}
+            disabled={inputDisabled}
           />
         </FormRow>
         <FormRow id="description" label="Description">
@@ -415,7 +419,7 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
             className="nes-textarea"
             placeholder="Description…"
             onChange={handleDescriptionChange}
-            disabled={state.loading}
+            disabled={inputDisabled}
           />
         </FormRow>
       </fieldset>
