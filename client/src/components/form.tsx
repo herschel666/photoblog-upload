@@ -80,19 +80,19 @@ const setAltText = (altText: string): SetAltTextAction => ({
 });
 setAltText.type = 'setAltText';
 
-type SetDateAction = Action<{ date: string }>;
-const setDate = (date: string): SetDateAction => ({
-  type: setDate.type,
-  payload: { date },
-});
-setDate.type = 'setDate';
-
 type SetDescriptionAction = Action<{ description: string }>;
 const setDescription = (description: string): SetDescriptionAction => ({
   type: setDescription.type,
   payload: { description },
 });
 setDescription.type = 'setDescription';
+
+type SetDateAction = Action<{ date: string }>;
+const setDate = (date: string): SetDateAction => ({
+  type: setDate.type,
+  payload: { date },
+});
+setDate.type = 'setDate';
 
 type ResetFormAction = Action<void>;
 const resetForm = (): ResetFormAction => ({
@@ -109,8 +109,8 @@ type ReducerAction =
   | SetFileContentAction
   | SetTagsAction
   | SetAltTextAction
-  | SetDateAction
   | SetDescriptionAction
+  | SetDateAction
   | ResetFormAction;
 
 export const hasRequiredPayload = (submitPayload?: SubmitPayload): boolean => {
@@ -232,13 +232,13 @@ const reducer = (state: ReducerShape, action: ReducerAction): ReducerShape => {
       };
     }
 
-    case setDate.type: {
-      const { date } = (action as SetDateAction).payload;
+    case setDescription.type: {
+      const { description } = (action as SetDescriptionAction).payload;
       const newState = {
         ...state,
         submitPayload: {
           ...state.submitPayload,
-          date,
+          description,
         },
       };
 
@@ -248,13 +248,13 @@ const reducer = (state: ReducerShape, action: ReducerAction): ReducerShape => {
       };
     }
 
-    case setDescription.type: {
-      const { description } = (action as SetDescriptionAction).payload;
+    case setDate.type: {
+      const { date } = (action as SetDateAction).payload;
       const newState = {
         ...state,
         submitPayload: {
           ...state.submitPayload,
-          description,
+          date,
         },
       };
 
@@ -333,13 +333,14 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
     dispatch(setTitle(evnt.currentTarget.value.trim()));
   const handleTagsChange = (evnt: React.SyntheticEvent<HTMLInputElement>) =>
     dispatch(setTags(evnt.currentTarget.value.trim().split(/\s*,\s*/)));
-  const handleAltTextChange = (evnt: React.SyntheticEvent<HTMLInputElement>) =>
-    dispatch(setAltText(evnt.currentTarget.value.trim()));
-  const handleDateChange = (evnt: React.SyntheticEvent<HTMLInputElement>) =>
-    dispatch(setDate(evnt.currentTarget.value.trim()));
+  const handleAltTextChange = (
+    evnt: React.SyntheticEvent<HTMLTextAreaElement>
+  ) => dispatch(setAltText(evnt.currentTarget.value.trim()));
   const handleDescriptionChange = (
     evnt: React.SyntheticEvent<HTMLTextAreaElement>
   ) => dispatch(setDescription(evnt.currentTarget.value.trim()));
+  const handleDateChange = (evnt: React.SyntheticEvent<HTMLInputElement>) =>
+    dispatch(setDate(evnt.currentTarget.value.trim()));
 
   return (
     <form method="post" onSubmit={handleSubmit}>
@@ -386,14 +387,23 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
           />
         </FormRow>
         <FormRow id="altText" label="Alt-Text">
-          <input
-            type="text"
+          <textarea
             id="altText"
             name="altText"
-            maxLength={130}
+            maxLength={280}
             className="nes-input"
             placeholder="Alt-Text…"
             onChange={handleAltTextChange}
+            disabled={state.loading}
+          />
+        </FormRow>
+        <FormRow id="description" label="Description">
+          <textarea
+            id="description"
+            name="description"
+            className="nes-textarea"
+            placeholder="Description…"
+            onChange={handleDescriptionChange}
             disabled={state.loading}
           />
         </FormRow>
@@ -405,16 +415,6 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
             className="nes-input"
             placeholder="Date…"
             onChange={handleDateChange}
-            disabled={state.loading}
-          />
-        </FormRow>
-        <FormRow id="description" label="Description">
-          <textarea
-            id="description"
-            name="description"
-            className="nes-textarea"
-            placeholder="Description…"
-            onChange={handleDescriptionChange}
             disabled={state.loading}
           />
         </FormRow>
