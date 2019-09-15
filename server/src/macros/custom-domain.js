@@ -1,6 +1,6 @@
 const API_GATEWAY_ZONE_ID = 'Z2FDTNDATAQYW2';
 
-module.exports = ({ cfn, stage }) => {
+module.exports = (_, cfn, stage) => {
   cfn.Parameters = {
     ...cfn.Parameters,
     Stage: {
