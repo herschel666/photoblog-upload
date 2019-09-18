@@ -14,7 +14,7 @@
     "eslint-config-prettier": "6.3.0",
     "eslint-plugin-import": "2.18.2",
     "eslint-plugin-jest": "22.17.0",
-    "eslint-plugin-prettier": "3.1.0",
+    "eslint-plugin-prettier": "3.1.1",
     "fetch-cookie": "0.7.3",
     "is-base64": "1.0.0",
     "jest": "24.9.0",
