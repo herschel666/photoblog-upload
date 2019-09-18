@@ -4,7 +4,7 @@
   "license": "MIT",
   "dependencies": {
     "classnames": "2.2.6",
-    "contentful-management": "5.10.2",
+    "contentful-management": "5.11.0",
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "react-scripts": "3.1.1",
