@@ -3,6 +3,6 @@
   "version": "0.1.0",
   "license": "MIT",
   "dependencies": {
-    "@architect/functions": "3.3.14"
+    "@architect/functions": "3.3.15"
   }
 }
