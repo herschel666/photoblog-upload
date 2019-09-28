@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
+    "preinstall": "rm -rf ./src/http/get-static-000type-000filename/static",
     "lint": "eslint --ignore-path .gitignore .",
     "jest": "NODE_ENV=testing QUIET=true jest server.test.js",
     "test": "npm run lint && npm run jest"
