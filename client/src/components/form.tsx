@@ -338,7 +338,7 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
   };
   const handleTitleChange = (evnt: React.SyntheticEvent<HTMLInputElement>) =>
     dispatch(setTitle(evnt.currentTarget.value.trim()));
-  const handleTagsChange = (evnt: React.SyntheticEvent<HTMLInputElement>) =>
+  const handleTagsChange = (evnt: React.SyntheticEvent<HTMLTextAreaElement>) =>
     dispatch(setTags(evnt.currentTarget.value.trim().split(/\s*,\s*/)));
   const handleAltTextChange = (
     evnt: React.SyntheticEvent<HTMLTextAreaElement>
@@ -381,12 +381,13 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
           />
         </FormRow>
         <FormRow id="tags" label="Tags">
-          <input
-            type="text"
+          <TextareaAutosize
+            minRows={1}
             id="tags"
             name="tags"
-            className="nes-input"
+            className={classNames(styles.textarea, 'nes-textarea')}
             placeholder="Tags…"
+            autoCapitalize="off"
             onChange={handleTagsChange}
             disabled={inputDisabled}
           />
