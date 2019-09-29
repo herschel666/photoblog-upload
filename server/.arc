@@ -16,3 +16,4 @@ post /logout
 
 @macros
 custom-domain
+custom-log-groups
