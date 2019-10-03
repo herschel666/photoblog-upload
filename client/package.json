@@ -7,7 +7,7 @@
     "contentful-management": "5.11.2",
     "react": "16.10.1",
     "react-dom": "16.10.1",
-    "react-scripts": "3.1.2",
+    "react-scripts": "3.2.0",
     "react-textarea-autosize": "7.1.0"
   },
   "scripts": {
