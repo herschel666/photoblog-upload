@@ -11,13 +11,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.x'
+          architecture: 'x64'
+
       - name: Use Node.js 10
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-
-      - name: Use Python 3
-        run: apt-get install python3-venv
 
       - name: Build & test the application
         env:
