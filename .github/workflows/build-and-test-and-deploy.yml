@@ -1,26 +1,37 @@
-name: CD
+name: Build and Test and Deploy
 
-on:
-  push:
-    branches:
-      - master
+on: [push, pull_request]
+
+env:
+  PASSWORD: letmein
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
 
-      - uses: actions/setup-python@v1
-        with:
-          python-version: '3.x'
-          architecture: 'x64'
-
       - name: Use Node.js 10
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
+
+      - name: Build & test the application
+        run: |
+          npm install
+          npm test
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.ref == 'master'
+
+    steps:
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.x'
+          architecture: 'x64'
 
       - name: Create AWS credentials file
         env:
@@ -34,14 +45,10 @@ jobs:
 
       - name: Build, test & deploy the application
         env:
-          PASSWORD: letmein
           HOSTED_ZONE_ID: ${{ secrets.HOSTED_ZONE_ID }}
           CERTIFICATE_ARN: ${{ secrets.CERTIFICATE_ARN }}
           TLD: ${{ secrets.TLD }}
-        run: |
-          npm install
-          npm test
-          make deploy-prod
+        run: make deploy-prod
 
       - name: Remove credentials file
         run: rm -f ~/.aws/credentials
