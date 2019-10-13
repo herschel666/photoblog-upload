@@ -15,7 +15,7 @@
     "build": "react-scripts build",
     "jest": "CI=true react-scripts test",
     "test": "npm run lint && npm run jest",
-    "lint": "tsc --noEmit && tslint --format stylish --project tsconfig.json"
+    "lint": "tsc --noEmit && tslint --format stylish --project tsconfig.json --exclude src/*.js"
   },
   "eslintConfig": {
     "extends": "react-app"
