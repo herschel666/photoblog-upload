@@ -1,7 +1,6 @@
 # Bring in the `source`-command
 SHELL := /bin/bash
 AWS_REGION = eu-central-1
-AWS_PROFILE = ek-photo-upload
 ENV_FLAG ?= ""
 ENV ?= Staging
 
@@ -14,9 +13,10 @@ delete-prod: ENV=Production
 delete-prod: delete
 
 .PHONY: mb
-mb: .venv/bin/aws activate guard-DEPLOY_BUCKET_URL
-	@ aws --profile $(AWS_PROFILE) --region $(AWS_REGION) \
-		s3 mb $(DEPLOY_BUCKET_URL)
+mb: .venv/bin/aws activate guard-AWS_ACCESS_KEY_ID guard-AWS_SECRET_ACCESS_KEY guard-DEPLOY_BUCKET_URL
+	@ AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID) \
+		AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY) \
+		aws --region $(AWS_REGION) s3 mb $(DEPLOY_BUCKET_URL)
 
 .PHONY: deploy
 deploy: .venv/bin/aws activate guard-TLD guard-HOSTED_ZONE_ID guard-CERTIFICATE_ARN
@@ -27,9 +27,10 @@ deploy: .venv/bin/aws activate guard-TLD guard-HOSTED_ZONE_ID guard-CERTIFICATE_
 		npx arc deploy $(ENV_FLAG)
 
 .PHONY: delete
-delete: .venv/bin/aws activate
-	@ aws --profile $(AWS_PROFILE) \
-		cloudformation delete-stack \
+delete: .venv/bin/aws activate guard-AWS_ACCESS_KEY_ID guard-AWS_SECRET_ACCESS_KEY
+	@ AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID) \
+		AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY) \
+		aws cloudformation delete-stack \
 		--stack-name PhotoblogUploadServer$(ENV) \
 		--region $(AWS_REGION)
 
