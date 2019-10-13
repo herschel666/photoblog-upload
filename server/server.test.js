@@ -90,7 +90,7 @@ describe('POST /', () => {
       },
       body: 'password=letmein',
     });
-    expect(response.ok).toBe(true);
+    // expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
 
     const html = await response.text();
