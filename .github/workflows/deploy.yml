@@ -16,6 +16,9 @@ jobs:
         with:
           node-version: '10.x'
 
+      - name: Use Python 3
+        run: apt-get install python3-venv
+
       - name: Build & test the application
         env:
           PASSWORD: letmein
