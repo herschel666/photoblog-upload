@@ -30,6 +30,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - name: Use Node.js 10
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
       - uses: actions/setup-python@v1
         with:
           python-version: '3.x'
@@ -45,12 +50,14 @@ jobs:
           echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
           echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
 
-      - name: Build, test & deploy the application
+      - name: Install & deploy the application
         env:
           HOSTED_ZONE_ID: ${{ secrets.HOSTED_ZONE_ID }}
           CERTIFICATE_ARN: ${{ secrets.CERTIFICATE_ARN }}
           TLD: ${{ secrets.TLD }}
-        run: make deploy-prod
+        run: |
+          npm install
+          make deploy-prod
 
       - name: Remove credentials file
         run: rm -f ~/.aws/credentials
