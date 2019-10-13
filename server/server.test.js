@@ -91,7 +91,7 @@ describe('POST /', () => {
       body: 'password=letmein',
     });
     // expect(response.ok).toBe(true);
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(304);
 
     const html = await response.text();
     parts.forEach(expect(html).toContain);
