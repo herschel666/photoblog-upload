@@ -1,0 +1,31 @@
+.image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.button {
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 2rem;
+}
+
+.button[disabled] {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.fileWrap {
+  height: 0;
+  overflow: hidden;
+}
+
+.file {
+  width: calc(100% - 4px);
+}
+
+.file::-webkit-file-upload-button {
+  border: none;
+  background-color: #212529;
+  color: white;
+}

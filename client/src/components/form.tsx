@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import { FormRow } from './form-row';
 import { LoadingBar, LoadingState } from './loading-bar';
+import { ImageInput } from './image-input';
 import styles from './form.module.css';
 
 export type UpldateLoadingStateFunction = (loadingState?: LoadingState) => void;
@@ -73,6 +74,13 @@ const setFileContent = (fileContent: ArrayBuffer): SetFileContentAction => ({
 });
 setFileContent.type = 'setFileContent';
 
+type ResetFileAction = Action<void>;
+const resetFile = (): ResetFileAction => ({
+  type: resetFile.type,
+  payload: undefined,
+});
+resetFile.type = 'resetFile';
+
 type SetTagsAction = Action<{ tags: string[] }>;
 const setTags = (tags: string[]): SetTagsAction => ({
   type: setTags.type,
@@ -114,6 +122,7 @@ type ReducerAction =
   | SetTitleAction
   | SetFileNameAction
   | SetFileContentAction
+  | ResetFileAction
   | SetTagsAction
   | SetAltTextAction
   | SetDescriptionAction
@@ -207,6 +216,17 @@ const reducer = (state: ReducerShape, action: ReducerAction): ReducerShape => {
       };
     }
 
+    case resetFile.type: {
+      const { fileName, fileContent, ...submitPayload } =
+        state.submitPayload || {};
+
+      return {
+        ...state,
+        fileError: false,
+        submitPayload,
+      };
+    }
+
     case setTags.type: {
       const { tags } = (action as SetTagsAction).payload;
       const newState = {
@@ -290,8 +310,35 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
   });
   const inputDisabled = !(state.loadingState === undefined);
   const submitDisabled = !state.valid || inputDisabled;
+  const handleFileChange = (
+    err: ProgressEvent<FileReader> | null,
+    name: string,
+    image: ArrayBuffer
+  ) => {
+    if (err) {
+      // tslint:disable-next-line no-console
+      console.error(err);
+      dispatch(setFileError(true));
+      return;
+    }
+    dispatch(setFileName(name));
+    dispatch(setFileContent(image));
+  };
+  const handleFileReset = () => {
+    if (fileInput.current) {
+      fileInput.current.value = '';
+    }
+    dispatch(resetFile());
+  };
+  const handleReset = () => {
+    window.scrollTo(0, 0);
+    handleFileReset();
+    dispatch(resetForm());
+  };
   const handleSubmit = async (evnt: React.SyntheticEvent<HTMLFormElement>) => {
     evnt.preventDefault();
+    window.scrollTo(0, 0);
+
     const form = evnt.currentTarget;
 
     if (
@@ -319,23 +366,6 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
       form.reset();
     }
   };
-  const handleFileChange = (evnt: React.SyntheticEvent<HTMLInputElement>) => {
-    if (!evnt.currentTarget.files) {
-      return;
-    }
-    const input = evnt.currentTarget.files[0];
-    const reader: FileReader = new FileReader();
-    reader.readAsArrayBuffer(input);
-    reader.onload = () => {
-      dispatch(setFileName(input.name.trim()));
-      dispatch(setFileContent(reader.result as ArrayBuffer));
-    };
-    reader.onerror = (err) => {
-      // tslint:disable-next-line no-console
-      console.error(err);
-      dispatch(setFileError(true));
-    };
-  };
   const handleTitleChange = (evnt: React.SyntheticEvent<HTMLInputElement>) =>
     dispatch(setTitle(evnt.currentTarget.value.trim()));
   const handleTagsChange = (evnt: React.SyntheticEvent<HTMLTextAreaElement>) =>
@@ -355,18 +385,15 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
         <legend className={styles.legend}>Upload an image…</legend>
         <LoadingBar value={state.loadingState} />
         <FormRow id="file" label="File">
-          <input
-            type="file"
-            id="file"
-            accept="image/jpg"
-            name="file"
-            className={classNames(styles.fileButton, 'nes-input', {
-              'is-error': state.fileError,
-            })}
-            placeholder="File…"
-            onChange={handleFileChange}
+          <ImageInput
             ref={fileInput}
+            id="file"
+            name="file"
             disabled={inputDisabled}
+            onChange={handleFileChange}
+            onReset={handleFileReset}
+            hasError={state.fileError}
+            placeholder="File…"
           />
         </FormRow>
         <FormRow id="title" label="Title">
@@ -374,7 +401,7 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
             type="text"
             id="title"
             name="title"
-            className="nes-input"
+            className={classNames(styles.input, 'nes-input')}
             placeholder="Title…"
             onChange={handleTitleChange}
             disabled={inputDisabled}
@@ -420,13 +447,21 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
             type="date"
             id="date"
             name="date"
-            className="nes-input"
+            className={classNames(styles.input, 'nes-input')}
             placeholder="Date…"
             onChange={handleDateChange}
             disabled={inputDisabled}
           />
         </FormRow>
       </fieldset>
+      <button
+        type="reset"
+        className={classNames(styles.reset, 'nes-btn')}
+        disabled={inputDisabled}
+        onClick={handleReset}
+      >
+        Reset
+      </button>
       <button
         className={classNames(styles.submit, 'nes-btn is-primary')}
         disabled={submitDisabled}
