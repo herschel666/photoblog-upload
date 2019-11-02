@@ -4,7 +4,7 @@ photoblog-upload-server
 @aws
 region eu-central-1
 profile ek-photo-upload
-bucket ek-photo-upload-deploy-bucket
+bucket ek-geloets-installationen-ftw
 
 @http
 get /
