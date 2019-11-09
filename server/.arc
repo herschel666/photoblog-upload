@@ -16,4 +16,4 @@ post /logout
 
 @macros
 custom-domain
-custom-log-groups
+herschel666-arc-macros-custom-log-groups
