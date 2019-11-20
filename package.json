@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/herschel666/photoblog-upload#readme",
   "dependencies": {
-    "lerna": "3.18.4"
+    "lerna": "3.19.0"
   },
   "devDependencies": {
     "prettier": "1.19.1"
