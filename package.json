@@ -21,10 +21,8 @@
     "url": "https://github.com/herschel666/photoblog-upload/issues"
   },
   "homepage": "https://github.com/herschel666/photoblog-upload#readme",
-  "dependencies": {
-    "lerna": "3.20.0"
-  },
   "devDependencies": {
+    "lerna": "3.20.0",
     "prettier": "1.19.1"
   }
 }
