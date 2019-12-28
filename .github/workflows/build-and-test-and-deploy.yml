@@ -18,6 +18,8 @@ jobs:
           node-version: '12.x'
 
       - name: Build & test the application
+        env:
+          PASSWORD: letmein
         run: |
           npm install
           npm test
@@ -42,10 +44,6 @@ jobs:
 
       - name: Deploy the application
         if: github.ref == 'refs/heads/master'
-        env:
-          HOSTED_ZONE_ID: ${{ secrets.HOSTED_ZONE_ID }}
-          CERTIFICATE_ARN: ${{ secrets.CERTIFICATE_ARN }}
-          TLD: ${{ secrets.TLD }}
         run: make deploy-prod
 
       - name: Remove credentials file
