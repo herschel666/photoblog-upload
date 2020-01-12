@@ -31,7 +31,7 @@ export const LoadingBar: React.SFC<Props> = ({ value }) => {
   }
 
   return (
-    <fieldset className={styles.fieldset}>
+    <fieldset className={styles.fieldset} data-testid="progress">
       <legend className={styles.legend}>{getLabel(value)}</legend>
       <progress className="nes-progress is-primary" value={value} max={50} />
     </fieldset>
