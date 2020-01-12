@@ -2,7 +2,7 @@
   "extends": ["config:base"],
   "packageRules": [
     {
-      "depTypeList": ["devDependencies"],
+      "depTypeList": ["devDependencies", "dependencies"],
       "updateTypes": ["minor", "patch"],
       "automerge": true
     },
