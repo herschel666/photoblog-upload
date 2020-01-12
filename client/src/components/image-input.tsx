@@ -40,7 +40,6 @@ export const ImageInput = forwardRef<HTMLInputElement, Props>(
       }
 
       const file = evnt.currentTarget.files[0];
-      const prefix = `data:${file.type};base64,`;
       const fileName = file.name.trim();
       const contentReader: FileReader = new FileReader();
       const previewReader: FileReader = new FileReader();
@@ -50,13 +49,12 @@ export const ImageInput = forwardRef<HTMLInputElement, Props>(
         onChange(null, fileName, contentReader.result as ArrayBuffer);
       contentReader.onerror = (err) => onChange(err, '', new ArrayBuffer(0));
 
-      previewReader.readAsBinaryString(file);
-      previewReader.onload = () =>
-        setPreview(`${prefix}${btoa(previewReader.result as string)}`);
+      previewReader.readAsDataURL(file);
+      previewReader.onload = () => setPreview(previewReader.result as string);
       previewReader.onerror = (err) => {
         // tslint:disable-next-line no-console
         console.error(err);
-        setPreview(`${prefix}=`);
+        setPreview(`data:${file.type};base64,=`);
       };
     };
     const handleReset = useCallback(() => {
@@ -87,7 +85,6 @@ export const ImageInput = forwardRef<HTMLInputElement, Props>(
               className={classNames(styles.button, 'nes-btn is-error')}
               disabled={disabled}
               aria-label="Reset"
-              data-testid="reset-image-button"
             >
               &times;
             </button>
