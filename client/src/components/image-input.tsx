@@ -12,7 +12,6 @@ import styles from './image-input.module.css';
 interface Props {
   id: string;
   name: string;
-  placeholder: string;
   disabled: boolean;
   hasError: boolean;
   onChange: (
@@ -24,7 +23,7 @@ interface Props {
 }
 
 export const ImageInput = forwardRef<HTMLInputElement, Props>(
-  ({ id, name, placeholder, disabled, hasError, onChange, onReset }, ref) => {
+  ({ id, name, disabled, hasError, onChange, onReset }, ref) => {
     const [preview, setPreview] = useState<string | null>(null);
     const [resetListenerBound, setResetListenerBound] = useState<boolean>(
       false
@@ -88,6 +87,7 @@ export const ImageInput = forwardRef<HTMLInputElement, Props>(
               className={classNames(styles.button, 'nes-btn is-error')}
               disabled={disabled}
               aria-label="Reset"
+              data-testid="reset-image-button"
             >
               &times;
             </button>
@@ -102,7 +102,6 @@ export const ImageInput = forwardRef<HTMLInputElement, Props>(
             className={classNames(styles.file, 'nes-input', {
               'is-error': hasError,
             })}
-            placeholder={placeholder}
             ref={ref}
             disabled={disabled}
             onChange={handleChange}

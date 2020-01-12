@@ -393,7 +393,6 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
             onChange={handleFileChange}
             onReset={handleFileReset}
             hasError={state.fileError}
-            placeholder="File…"
           />
         </FormRow>
         <FormRow id="title" label="Title">
