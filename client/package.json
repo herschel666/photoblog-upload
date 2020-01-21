@@ -39,7 +39,7 @@
     "@types/jest": "24.9.0",
     "@types/node": "12.12.25",
     "@types/react": "16.9.17",
-    "@types/react-dom": "16.9.4",
+    "@types/react-dom": "16.9.5",
     "@types/react-textarea-autosize": "4.3.5",
     "tslint": "5.20.1",
     "tslint-config-prettier": "1.18.0",
