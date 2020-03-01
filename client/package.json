@@ -5,7 +5,7 @@
   "dependencies": {
     "classnames": "2.2.6",
     "contentful-management": "5.12.0",
-    "nock": "12.0.1",
+    "nock": "12.0.2",
     "react": "16.13.0",
     "react-dom": "16.13.0",
     "react-scripts": "3.4.0",
