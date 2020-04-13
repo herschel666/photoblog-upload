@@ -3,7 +3,8 @@ const { resolve: urlJoin } = require('url');
 const { join: pathJoin } = require('path');
 const sandbox = require('@architect/sandbox');
 const nodeFetch = require('node-fetch');
-const fetch = require('fetch-cookie/node-fetch')(nodeFetch);
+const { CookieJar } = require('tough-cookie');
+const fetch = require('fetch-cookie/node-fetch')(nodeFetch, new CookieJar());
 const isBase64 = require('is-base64');
 
 let killSandbox;
