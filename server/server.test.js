@@ -7,7 +7,6 @@ const { CookieJar } = require('tough-cookie');
 const fetch = require('fetch-cookie/node-fetch')(nodeFetch, new CookieJar());
 const isBase64 = require('is-base64');
 
-let killSandbox;
 let log;
 
 const loginPageParts = [
@@ -36,16 +35,16 @@ beforeAll(async () => {
   writeFile(pathJoin(staticFilePath, 'css', 'test.css'), ...fileArgs);
 
   try {
-    killSandbox = await sandbox.start();
+    await sandbox.start({ port: 3333 });
   } catch (err) {
     expect(err).toBeNull();
   }
 });
 
-afterAll(() => {
+afterAll(async () => {
   console.log = log;
   try {
-    killSandbox();
+    await sandbox.end();
   } catch (err) {
     expect(err).toBeNull();
   }
