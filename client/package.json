@@ -13,7 +13,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "jest": "CI=true react-scripts test",
+    "jest": "CI=true react-scripts test --env jest-environment-jsdom-sixteen",
     "test": "npm run lint && npm run jest",
     "lint": "tsc --noEmit && tslint --format stylish --project tsconfig.json --exclude src/*.js"
   },
@@ -40,6 +40,7 @@
     "@types/react": "16.9.35",
     "@types/react-dom": "16.9.8",
     "@types/react-textarea-autosize": "4.3.5",
+    "jest-environment-jsdom-sixteen": "1.0.3",
     "tslint": "6.1.2",
     "tslint-config-prettier": "1.18.0",
     "tslint-microsoft-contrib": "6.2.0",
