@@ -45,7 +45,7 @@ it('shows the image preview', async () => {
   expect(handleChange.mock.calls[0][2]).toBeDefined();
 
   const { src } = getByRole('presentation') as HTMLImageElement;
-  expect(src.startsWith('data:;base64,')).toBe(true);
+  expect(src.startsWith('data:application/octet-stream;base64,')).toBe(true);
 });
 
 it('removes the preview', async () => {
