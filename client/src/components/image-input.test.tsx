@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitForElement } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 
 import { imageFile, imageName } from '../test-helper';
 import { FormRow } from './form-row';
@@ -32,12 +32,12 @@ const renderInput = ({ onChange = noop, onReset = noop }) => {
 
 it('shows the image preview', async () => {
   const handleChange = jest.fn();
-  const { getByText, getByRole } = renderInput({
+  const { queryByText, queryByRole, getByRole } = renderInput({
     onChange: handleChange,
   });
 
-  await waitForElement(() => getByText('×'));
-  await waitForElement(() => getByRole('presentation'));
+  await waitFor(() => queryByText('×'));
+  await waitFor(() => queryByRole('presentation'));
 
   expect(handleChange).toHaveBeenCalled();
   expect(handleChange.mock.calls[0][0]).toBe(null);
@@ -54,7 +54,7 @@ it('removes the preview', async () => {
     onReset: handleReset,
   });
 
-  await waitForElement(() => getByText('×'));
+  await waitFor(() => getByText('×'));
 
   fireEvent.click(getByText('×'));
 

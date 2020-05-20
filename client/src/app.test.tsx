@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitForElement, act } from '@testing-library/react';
+import { render, fireEvent, waitFor, act } from '@testing-library/react';
 import type { AssetArgs, EntryArgs } from 'contentful-management';
 
 import { imageFile } from './test-helper';
@@ -54,7 +54,7 @@ const timeout = async (ms: number) =>
 
 it('uploads an image', async () => {
   const onSubmitError = jest.fn();
-  const { getByText, getByLabelText, getByTestId } = render(
+  const { getByText, getByLabelText, getByTestId, queryByTestId } = render(
     <App onSubmitError={onSubmitError} />
   );
   const submit = getByText('Submit') as HTMLButtonElement;
@@ -83,7 +83,7 @@ it('uploads an image', async () => {
 
   fireEvent.click(submit);
 
-  await waitForElement(() => getByTestId('progress'));
+  await waitFor(() => queryByTestId('progress'));
   await act(async () => void (await timeout(200)));
 
   expect(() => getByTestId('progress')).toThrow();
