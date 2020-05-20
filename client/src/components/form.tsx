@@ -31,6 +31,7 @@ interface Props {
     updateLoadingState: UpldateLoadingStateFunction,
     args?: SubmitPayload
   ) => Promise<void>;
+  onSubmitError: (err: any) => void;
 }
 
 interface Action<T> {
@@ -302,7 +303,7 @@ const reducer = (state: ReducerShape, action: ReducerAction): ReducerShape => {
 };
 
 // tslint:disable-next-line max-func-body-length
-export const Form: React.SFC<Props> = ({ onSubmit }) => {
+export const Form: React.SFC<Props> = ({ onSubmit, onSubmitError }) => {
   const fileInput = useRef<HTMLInputElement>(null);
   const [state, dispatch] = useReducer<typeof reducer>(reducer, {
     valid: false,
@@ -356,8 +357,7 @@ export const Form: React.SFC<Props> = ({ onSubmit }) => {
       } catch (err) {
         // tslint:disable-next-line no-console
         console.error(err);
-        // tslint:disable-next-line no-suspicious-comment
-        // TODO: handle error :p
+        onSubmitError(err);
       }
       if (fileInput.current) {
         fileInput.current.value = '';
