@@ -35,7 +35,7 @@ beforeAll(async () => {
   writeFile(pathJoin(staticFilePath, 'css', 'test.css'), ...fileArgs);
 
   try {
-    await sandbox.start({ port: 3333 });
+    await sandbox.start({ quiet: true });
   } catch (err) {
     expect(err).toBeNull();
   }
