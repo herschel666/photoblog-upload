@@ -9,9 +9,15 @@ import {
   UpldateLoadingStateFunction,
 } from './components/form';
 
+interface Props {
+  onSubmitError?: (err: any) => void;
+}
+
 const { SPACE_ID, ACCESS_TOKEN, CF_ENV } = window.photoblogUploadClient;
 
-const App: React.SFC = () => {
+// tslint:disable:next-line no-suspicious-comment
+// TODO: handle submit error 4 realz
+const App: React.SFC<Props> = ({ onSubmitError = () => void 0 }) => {
   const handleSubmit = async (
     updateLoadingState: UpldateLoadingStateFunction,
     args?: SubmitPayload
@@ -89,7 +95,7 @@ const App: React.SFC = () => {
 
   return (
     <Layout>
-      <Form onSubmit={handleSubmit} />
+      <Form onSubmit={handleSubmit} onSubmitError={onSubmitError} />
     </Layout>
   );
 };
