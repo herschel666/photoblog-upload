@@ -1,4 +1,5 @@
 import React, { useReducer, useRef } from 'react';
+// tslint:disable-next-line match-default-export-name
 import TextareaAutosize from 'react-textarea-autosize';
 import classNames from 'classnames';
 
