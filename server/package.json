@@ -16,7 +16,7 @@
     "eslint-plugin-import": "2.21.2",
     "eslint-plugin-jest": "23.16.0",
     "eslint-plugin-prettier": "3.1.4",
-    "fetch-cookie": "0.10.0",
+    "fetch-cookie": "0.10.1",
     "herschel666-arc-macros-custom-log-groups": "0.1.2",
     "is-base64": "1.1.0",
     "jest": "26.0.1",
