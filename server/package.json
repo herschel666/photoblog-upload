@@ -11,7 +11,7 @@
   "devDependencies": {
     "@architect/architect": "6.4.1",
     "@architect/sandbox": "1.12.3",
-    "eslint": "7.3.0",
+    "eslint": "7.3.1",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-import": "2.21.2",
     "eslint-plugin-jest": "23.16.0",
