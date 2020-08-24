@@ -4,7 +4,9 @@ const fs = require('fs');
 
 const readFile = promisify(fs.readFile);
 
-exports.handler = async () => {
+exports.handler = async (req) => {
+  console.log(req);
+
   try {
     const filePath = path.join(__dirname, 'favicon.ico');
     const content = await readFile(filePath);
