@@ -45,6 +45,7 @@ exports.handler = async (req) => {
     };
 
     return {
+      statusCode: 200,
       headers,
       body,
     };
