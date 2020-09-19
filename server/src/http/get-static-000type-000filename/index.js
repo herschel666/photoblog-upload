@@ -22,6 +22,7 @@ exports.handler = async (req) => {
     const filePath = path.join(__dirname, 'static', type, filename);
     const body = await readFile(filePath, 'utf8');
     return {
+      statusCode: 200,
       headers: {
         'content-type': getContentType(type),
         'cache-control': 'public, max-age=31536000, immutable',

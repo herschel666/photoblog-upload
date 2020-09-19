@@ -18,6 +18,7 @@ exports.handler = async (req) => {
 
     return {
       isBase64Encoded: true,
+      statusCode: 200,
       headers,
       body,
     };
