@@ -5,7 +5,8 @@ const fs = require('fs');
 
 const readFile = promisify(fs.readFile);
 
-const isInvalidRequestViaProxy = (req) => req.path !== '/';
+const isInvalidRequestViaProxy = (req) =>
+  req.pathParameters && req.pathParameters.proxy;
 
 const loadPage = (name) =>
   readFile(path.join(__dirname, `${name}.html`), 'utf8');
