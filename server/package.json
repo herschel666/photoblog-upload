@@ -24,6 +24,10 @@
     "tough-cookie": "4.0.0"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/src/http/get-static-000type-000filename/static/"
+    ]
   }
 }
