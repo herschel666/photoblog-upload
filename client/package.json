@@ -5,8 +5,8 @@
   "dependencies": {
     "classnames": "2.2.6",
     "contentful-management": "6.1.2",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
     "react-scripts": "4.0.0",
     "react-textarea-autosize": "8.2.0"
   },
