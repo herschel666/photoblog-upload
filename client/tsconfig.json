@@ -10,7 +10,7 @@
     "strict": true,
     "module": "esnext",
     "target": "esnext",
-    "jsx": "preserve",
+    "jsx": "react",
     "allowJs": true,
     "noImplicitAny": true,
     "moduleResolution": "node",
@@ -20,7 +20,8 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": ["./src"],
   "exclude": ["node_modules"],
