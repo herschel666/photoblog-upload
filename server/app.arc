@@ -14,6 +14,8 @@ get /static/:type/:filename
 post /
 post /logout
 
+any /*
+
 @macros
 custom-domain
 herschel666-arc-macros-custom-log-groups
