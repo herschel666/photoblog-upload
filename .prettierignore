@@ -1,2 +1,5 @@
+.venv
 package.json
+package-lock.json
 client/build
+server/src/http/get-static-000type-000filename/static
