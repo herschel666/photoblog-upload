@@ -8,7 +8,9 @@
     "postbootstrap": "./scripts/bootstrap-server",
     "start": "cd client && npm start",
     "serve": "cd server && npx arc sandbox",
-    "fmt": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --write \"**/**.{js,jsx,ts,tsx,md,css}\""
+    "prettier": "prettier --config ./.prettierrc --ignore-path ./.prettierignore \"**/**.{js,jsx,ts,tsx,json,md,css}\"",
+    "fmt": "npm run prettier -- --write",
+    "fmt:check": "npm run prettier -- --check"
   },
   "repository": {
     "type": "git",
