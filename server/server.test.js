@@ -58,20 +58,6 @@ describe('GET /', () => {
     const html = await response.text();
     loginPageParts.forEach(expect(html).toContain);
   });
-
-  it.each(['/.htaccess', '/.htpasswd', '/index.html', '/lorem/ipsum.txt'])(
-    'handles invalid pathnames coming via the proxy',
-    async (pathName) => {
-      const response = await fetch(url(pathName));
-
-      expect(response.ok).not.toBe(true);
-      expect(response.status).toBe(404);
-      expect(response.headers.get('content-type')).toBe(
-        'text/plain; charset=utf8'
-      );
-      expect(response.text()).resolves.toBe('File not found');
-    }
-  );
 });
 
 describe('POST /', () => {
@@ -158,4 +144,24 @@ describe('GET /static/:type/:filename', () => {
       );
     }
   );
+});
+
+describe('ANY /*', () => {
+  ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'].forEach((method) => {
+    it.each(['/.htaccess', '/.htpasswd', '/index.html', '/lorem/ipsum.txt'])(
+      `handles invalid pathnames coming via the catchAll route for ${method}-requests`,
+      async (pathName) => {
+        const response = await fetch(url(pathName), { method });
+
+        expect(response.ok).not.toBe(true);
+        expect(response.status).toBe(404);
+        expect(response.headers.get('content-type')).toBe(
+          'text/plain; charset=utf8'
+        );
+        if (method !== 'HEAD') {
+          expect(response.text()).resolves.toBe('Not found');
+        }
+      }
+    );
+  });
 });
