@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "scripts": {
     "install": "npm run bootstrap",
-    "test": "lerna run test",
+    "test-packages": "lerna run test",
+    "test": "npm-run-all fmt:check test-packages",
     "bootstrap": "lerna bootstrap",
     "postbootstrap": "./scripts/bootstrap-server",
     "start": "cd client && npm start",
@@ -25,6 +26,7 @@
   "homepage": "https://github.com/herschel666/photoblog-upload#readme",
   "devDependencies": {
     "lerna": "3.22.1",
+    "npm-run-all": "4.1.5",
     "prettier": "2.1.2"
   }
 }
