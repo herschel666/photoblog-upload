@@ -94,7 +94,7 @@ jest.mock('contentful-management', () => {
 });
 
 const timeout = async (ms: number) =>
-  new Promise((resolve: () => void) => setTimeout(resolve, ms));
+  new Promise((resolve) => setTimeout(resolve, ms));
 
 it('uploads an image', async () => {
   const onSubmitError = jest.fn();
