@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "lib": ["dom", "es2017"],
+    "lib": [
+      "dom",
+      "es2017"
+    ],
     "noEmit": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -10,12 +13,14 @@
     "strict": true,
     "module": "esnext",
     "target": "esnext",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "allowJs": true,
     "noImplicitAny": true,
     "moduleResolution": "node",
     "skipLibCheck": true,
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "baseUrl": "./src",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -23,6 +28,12 @@
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["./src"],
-  "exclude": ["node_modules", "public", "build"]
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+    "node_modules",
+    "public",
+    "build"
+  ]
 }
