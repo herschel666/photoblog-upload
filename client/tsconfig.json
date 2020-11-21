@@ -24,6 +24,5 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["./src"],
-  "exclude": ["node_modules"],
-  "lib": ["dom", "es2015", "es2016"]
+  "exclude": ["node_modules", "public", "build"]
 }

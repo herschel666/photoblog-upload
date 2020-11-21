@@ -10,7 +10,7 @@ import {
 } from './components/form';
 
 interface Props {
-  onSubmitError?: (err: any) => void;
+  onSubmitError?: (err: unknown) => void;
 }
 
 const { SPACE_ID, ACCESS_TOKEN, CF_ENV } = window.photoblogUploadClient;
@@ -25,7 +25,7 @@ const App: React.SFC<Props> = ({ onSubmitError = () => void 0 }) => {
     if (!hasRequiredPayload(args)) {
       throw Error('Missing arguments.');
     }
-    if (!Boolean(ACCESS_TOKEN) || !Boolean(SPACE_ID)) {
+    if (!ACCESS_TOKEN || !SPACE_ID) {
       throw Error('Missing environment variables.');
     }
 

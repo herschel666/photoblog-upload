@@ -8,7 +8,7 @@ interface Props {
   value?: LoadingState;
 }
 
-export const getLabel = (loadingState: LoadingState) => {
+export const getLabel = (loadingState: LoadingState): string => {
   switch (loadingState) {
     case 10:
       return 'Preparing the environment…';
