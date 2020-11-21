@@ -13,7 +13,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "jest": "CI=true react-scripts test --env jest-environment-jsdom-sixteen",
+    "jest": "CI=true react-scripts test",
     "test": "npm run lint && npm run jest",
     "lint": "tsc && eslint 'src/**/*.{ts,tsx}' --ignore-path ../.gitignore"
   },
@@ -43,7 +43,6 @@
     "eslint-config-prettier": "6.15.0",
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react": "7.21.5",
-    "jest-environment-jsdom-sixteen": "1.0.3",
     "typescript": "4.0.5"
   }
 }
