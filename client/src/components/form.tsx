@@ -32,7 +32,7 @@ interface Props {
     updateLoadingState: UpldateLoadingStateFunction,
     args?: SubmitPayload
   ) => Promise<void>;
-  onSubmitError: (err: any) => void;
+  onSubmitError: (err: unknown) => void;
 }
 
 interface Action<T> {

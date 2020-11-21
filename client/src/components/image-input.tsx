@@ -71,10 +71,10 @@ export const ImageInput = forwardRef<HTMLInputElement, Props>(
 
     return (
       <>
-        {Boolean(preview) && (
+        {typeof preview === 'string' && preview.length > 0 && (
           <>
             <img
-              src={preview!}
+              src={preview}
               className={styles.image}
               alt=""
               role="presentation"
