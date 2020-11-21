@@ -1,9 +1,53 @@
 import React from 'react';
 import { render, fireEvent, waitFor, act } from '@testing-library/react';
-import type { AssetArgs, EntryArgs } from 'contentful-management';
 
 import { imageFile } from './test-helper';
 import App from './app';
+
+interface AssetArgs {
+  fields: {
+    title: {
+      'en-US': string;
+    };
+    description: {
+      'en-US': string;
+    };
+    file: {
+      'en-US': {
+        fileName: string;
+        contentType: 'image/jpg';
+        file: ArrayBuffer;
+      };
+    };
+  };
+}
+
+interface EntryArgs {
+  fields: {
+    title: {
+      'en-US': string;
+    };
+    date: {
+      'en-US'?: string;
+    };
+    tags: {
+      'en-US': string[];
+    };
+    description: {
+      'en-US'?: string;
+    };
+    file: {
+      'en-US': {
+        sys: {
+          id: string;
+          linkType: 'Asset';
+          // tslint:disable:next-line no-reserved-keywords
+          type: 'Link';
+        };
+      };
+    };
+  };
+}
 
 jest.mock('contentful-management', () => {
   const SPACE_ID = 'space_id';
