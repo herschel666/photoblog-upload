@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@architect/architect": "8.4.5",
-    "@architect/sandbox": "3.3.3",
+    "@architect/sandbox": "3.3.4",
     "eslint": "7.17.0",
     "eslint-config-prettier": "7.1.0",
     "eslint-plugin-import": "2.22.1",
