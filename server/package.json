@@ -9,7 +9,7 @@
     "test": "npm run lint && npm run jest"
   },
   "devDependencies": {
-    "@architect/architect": "8.4.7",
+    "@architect/architect": "8.4.8",
     "@architect/sandbox": "3.3.5",
     "eslint": "7.19.0",
     "eslint-config-prettier": "7.2.0",
