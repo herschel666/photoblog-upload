@@ -3,6 +3,9 @@
   "devDependencies": {
     "automerge": true
   },
+  "constraints": {
+    "npm": "^7"
+  },
   "packageRules": [
     {
       "groupName": "definitelyTyped",
