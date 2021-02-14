@@ -1,8 +1,0 @@
-{
-  "name": "photoblog-upload-server-http-post-index",
-  "version": "0.1.0",
-  "license": "MIT",
-  "dependencies": {
-    "@architect/functions": "3.13.9"
-  }
-}
