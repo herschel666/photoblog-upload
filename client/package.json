@@ -33,7 +33,7 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/react": "12.1.2",
+    "@testing-library/react": "12.1.5",
     "@types/classnames": "2.3.0",
     "@types/jest": "27.5.2",
     "@types/node": "16.11.47",
