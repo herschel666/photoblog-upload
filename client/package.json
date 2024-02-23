@@ -39,7 +39,7 @@
     "@types/node": "16.11.47",
     "@types/react": "17.0.48",
     "@types/react-dom": "17.0.17",
-    "eslint": "7.32.0",
+    "eslint": "8.57.0",
     "eslint-config-prettier": "7.2.0",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "7.26.1",
