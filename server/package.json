@@ -20,7 +20,7 @@
     "fetch-cookie": "1.0.1",
     "herschel666-arc-macros-custom-log-groups": "0.2.0",
     "is-base64": "1.1.0",
-    "jest": "27.3.1",
+    "jest": "27.5.1",
     "node-fetch": "2.6.7",
     "tough-cookie": "4.1.3"
   },
